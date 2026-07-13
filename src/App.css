@@ -484,6 +484,33 @@
   width: 100%;
 }
 
+/* ---------- share bar ---------- */
+
+.share-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.share-btn {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  background: #fff;
+  color: #8a4a2a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.share-btn.primary {
+  background: linear-gradient(135deg, #ffce54, #ff8a5c);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 138, 92, 0.35);
+}
+
 /* ---------- wuxing verdict ---------- */
 
 .wuxing-verdict {

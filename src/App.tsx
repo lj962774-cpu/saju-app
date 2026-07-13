@@ -8,6 +8,7 @@ import DayMasterCard from './components/DayMasterCard';
 import FunFortuneDeck from './components/FunFortuneDeck';
 import CompatibilityCard from './components/CompatibilityCard';
 import SinsalPanel from './components/SinsalPanel';
+import ShareBar from './components/ShareBar';
 import { calculateSaju, type SajuResult } from './lib/saju';
 import './App.css';
 
@@ -39,6 +40,7 @@ function App() {
       {result && (
         <div className="result-container">
           <DayMasterCard result={result} />
+          <ShareBar result={result} />
           <FunFortuneDeck result={result} />
           <SinsalPanel result={result} />
           <DaYunTable result={result} />

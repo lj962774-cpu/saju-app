@@ -60,6 +60,14 @@ const HONGYEOM: Record<string, string> = {
 // 백호대살 간지 (60갑자 중 특정 조합)
 const BAEKHO = new Set(['甲辰', '乙未', '丙戌', '丁丑', '戊辰', '壬戌', '癸丑']);
 
+// 괴강살 간지
+const GOEGANG = new Set(['庚辰', '庚戌', '壬辰', '壬戌', '戊戌']);
+
+// 원진살 지지 짝 (둘 다 사주에 있으면 성립)
+const WONJIN_PAIRS: [string, string][] = [
+  ['子', '未'], ['丑', '午'], ['寅', '酉'], ['卯', '申'], ['辰', '亥'], ['巳', '戌'],
+];
+
 const INFO: Record<string, SinsalInfo> = {
   도화살: {
     name: '도화살',
@@ -125,6 +133,22 @@ const INFO: Record<string, SinsalInfo> = {
     basis: '60갑자 중 특정 간지 조합(예: 갑진·을미 등)이 사주에 있을 때 생겨요. 흰 호랑이라는 뜻이에요.',
     good: false,
   },
+  괴강살: {
+    name: '괴강살',
+    emoji: '👑',
+    oneLine: '극과 극, 강력한 카리스마',
+    meaning: '리더십과 카리스마가 넘쳐서 크게 성공하거나 크게 굴곡지거나, 중간이 없는 강한 기운이에요. 고집과 자존심도 세요.',
+    basis: '경진·경술·임진 같은 특정 간지가 사주(특히 일주)에 있을 때 생겨요. 우두머리 별이라는 뜻이에요.',
+    good: false,
+  },
+  원진살: {
+    name: '원진살',
+    emoji: '😤',
+    oneLine: '애증이 교차하는 웬수 같은 인연',
+    meaning: '이유 없이 미우면서도 끌리는 관계를 뜻해요. 가족·연인 사이에서 티격태격하는 애증의 기운으로 봐요.',
+    basis: '서로 미워하는 지지 짝(예: 자–미, 축–오)이 사주 안에 함께 있을 때 성립해요. 원망하고 미워한다는 뜻이에요.',
+    good: false,
+  },
 };
 
 interface Pillar {
@@ -161,13 +185,23 @@ export function findSinsal(
     }
   }
 
-  // 일간 기준 신살들
+  // 일간 기준 + 간지 기준 신살들
   for (const p of pillars) {
     if (CHEONEUL[dayGan]?.includes(p.zhi)) add(INFO.천을귀인, p.label);
     if (MUNCHANG[dayGan] === p.zhi) add(INFO.문창귀인, p.label);
     if (YANGIN[dayGan] === p.zhi) add(INFO.양인살, p.label);
     if (HONGYEOM[dayGan] === p.zhi) add(INFO.홍염살, p.label);
     if (BAEKHO.has(p.ganZhi)) add(INFO.백호살, p.label);
+    if (GOEGANG.has(p.ganZhi)) add(INFO.괴강살, p.label);
+  }
+
+  // 원진살 (지지 짝이 함께 있으면 성립)
+  const zhiSet = new Set(pillars.map((p) => p.zhi));
+  for (const [a, b] of WONJIN_PAIRS) {
+    if (zhiSet.has(a) && zhiSet.has(b)) {
+      add(INFO.원진살, '지지');
+      break;
+    }
   }
 
   return hits;
