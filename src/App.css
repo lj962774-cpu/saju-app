@@ -1,0 +1,714 @@
+.app-container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  color: #2a2a2a;
+  background: #fffaf3;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.app-header p {
+  color: #777;
+  font-size: 0.92rem;
+}
+
+/* ---------- form ---------- */
+
+.birth-form {
+  background: #ffffff;
+  border: 1px solid #f0e6d6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.form-row label {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form-inline input[type='number'] {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.checkbox-label,
+.radio-label {
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff8a5c, #ff5c8a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 92, 138, 0.35);
+}
+
+.submit-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* ---------- result layout ---------- */
+
+.result-container {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.card-section h3 {
+  font-size: 1.15rem;
+  margin: 0 0 8px;
+  border: none;
+  padding: 0;
+}
+
+.lead-text {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.note {
+  font-size: 0.82rem;
+  color: #999;
+  margin-top: 6px;
+}
+
+/* ---------- hero character card ---------- */
+
+.hero-card {
+  border-radius: 20px;
+  padding: 32px 20px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.hero-emoji {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.hero-tagline {
+  font-size: 1rem;
+  opacity: 0.95;
+  margin-bottom: 14px;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 0 0 14px;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.82rem;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+/* ---------- wuxing bars ---------- */
+
+.wuxing-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wuxing-bar-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 24px;
+  align-items: center;
+  gap: 8px;
+}
+
+.wuxing-bar-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.wuxing-emoji {
+  font-size: 1.1rem;
+}
+
+.wuxing-bar-track {
+  background: #f1ede4;
+  border-radius: 8px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.wuxing-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+.wuxing-bar-value {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.wuxing-desc-list,
+.shishen-desc-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wuxing-desc-item,
+.shishen-desc-item {
+  font-size: 0.86rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ---------- shishen tags ---------- */
+
+.shishen-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shishen-tag-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #faf6ee;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.shishen-tag-emoji {
+  font-size: 1.6rem;
+}
+
+.shishen-tag-name {
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.shishen-tag-keyword {
+  font-size: 0.8rem;
+  color: #a15c2a;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.shishen-tag-desc {
+  font-size: 0.86rem;
+  color: #555;
+}
+
+/* ---------- dayun timeline ---------- */
+
+.dayun-timeline {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.dayun-chip {
+  flex: 0 0 auto;
+  min-width: 84px;
+  background: #faf6ee;
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.dayun-chip-age {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.dayun-chip-ganzhi {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.dayun-chip-wuxing {
+  font-size: 1rem;
+}
+
+/* ---------- details / expandable sections ---------- */
+
+.detail-toggle summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #a15c2a;
+  font-weight: 600;
+  margin-top: 12px;
+  list-style: none;
+}
+
+.detail-toggle summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail-toggle summary::before {
+  content: '▸ ';
+}
+
+.detail-toggle[open] summary::before {
+  content: '▾ ';
+}
+
+.expert-toggle {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- pillars table (expert view) ---------- */
+
+.pillars-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 12px;
+}
+
+.pillars-table th {
+  padding: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  border-bottom: 2px solid #333;
+}
+
+.pillar-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+}
+
+.hanja-box {
+  width: 100%;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.hanja-box .hanja {
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.hanja-box .hangul {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.shishen-tag {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.sub-info {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.shishen-table,
+.dayun-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.88rem;
+}
+
+.shishen-table th,
+.shishen-table td,
+.dayun-table th,
+.dayun-table td {
+  border: 1px solid #eee;
+  padding: 8px;
+  text-align: center;
+}
+
+.shishen-table th,
+.dayun-table th {
+  background: #faf6ee;
+}
+
+.app-footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+/* ---------- fun fortune deck ---------- */
+
+.fun-chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+}
+
+.fun-chip {
+  flex: 0 0 auto;
+  border: none;
+  background: #f1ede4;
+  color: #6b5a45;
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.fun-chip.active {
+  background: linear-gradient(135deg, #ff8a5c, #ff5c8a);
+  color: white;
+}
+
+.fun-result-card {
+  background: #fff7ee;
+  border-radius: 16px;
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.fun-result-emoji {
+  font-size: 2.6rem;
+  margin-bottom: 8px;
+}
+
+.fun-result-headline {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.fun-score-track {
+  background: #eee1cf;
+  border-radius: 8px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.fun-score-fill {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff8a5c, #ff5c8a);
+}
+
+.fun-result-subline {
+  font-size: 0.85rem;
+  color: #8a7a63;
+  font-weight: 600;
+}
+
+.small-btn {
+  padding: 10px;
+  font-size: 0.92rem;
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* ---------- wuxing verdict ---------- */
+
+.wuxing-verdict {
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: #fffdf9;
+}
+
+.wuxing-verdict-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.02rem;
+  margin-bottom: 8px;
+}
+
+.wuxing-verdict-emoji {
+  font-size: 1.6rem;
+}
+
+.wuxing-verdict-strong {
+  font-size: 0.92rem;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.wuxing-verdict-why {
+  font-size: 0.86rem;
+  color: #8a7a63;
+  background: #f7f1e6;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+}
+
+.wuxing-verdict-weak {
+  font-size: 0.86rem;
+  color: #a15c2a;
+}
+
+.wuxing-desc-why {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* ---------- dayun (interactive) ---------- */
+
+.dayun-chip {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 76px;
+  background: #faf6ee;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.dayun-chip.active {
+  border-color: #ff5c8a;
+  background: #fff0f4;
+}
+
+.dayun-now {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff5c8a;
+  color: white;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.dayun-chip-age {
+  font-size: 0.72rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.dayun-chip-emoji {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.dayun-chip-ganzhi {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.dayun-detail {
+  margin-top: 14px;
+  background: #fff7ee;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.dayun-detail-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.dayun-detail-emoji {
+  font-size: 2rem;
+}
+
+.dayun-detail-age {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.dayun-detail-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.dayun-detail-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.dayun-detail-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  background: #ffe3ec;
+  color: #c03a63;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* ---------- sinsal ---------- */
+
+.sinsal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sinsal-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  border-left: 5px solid #ccc;
+  background: #faf6ee;
+}
+
+.sinsal-card.good {
+  border-left-color: #4caf7d;
+  background: #f2faf5;
+}
+
+.sinsal-card.caution {
+  border-left-color: #e0a63a;
+  background: #fdf7ec;
+}
+
+.sinsal-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.sinsal-emoji {
+  font-size: 1.4rem;
+}
+
+.sinsal-name {
+  font-weight: 800;
+  font-size: 1.02rem;
+}
+
+.sinsal-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.sinsal-badge.good {
+  background: #d6f0e1;
+  color: #2e7d54;
+}
+
+.sinsal-badge.caution {
+  background: #f7e6c4;
+  color: #98701a;
+}
+
+.sinsal-where {
+  font-size: 0.72rem;
+  color: #aaa;
+  margin-left: auto;
+}
+
+.sinsal-oneline {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.sinsal-meaning {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.sinsal-basis {
+  font-size: 0.8rem;
+  color: #8a7a63;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
