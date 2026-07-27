@@ -6,6 +6,7 @@ export interface FortuneCard {
   headline: string;
   score?: number; // 0-100
   subline: string;
+  color?: string; // 행운의 색 견본용 hex
 }
 
 function baseSeed(result: SajuResult): string {
@@ -115,11 +116,88 @@ export function getPeakFortune(result: SajuResult): FortuneCard {
   };
 }
 
-export function getAnimalFortune(result: SajuResult): FortuneCard {
+// ---------- 타로 ----------
+
+interface TarotCard {
+  emoji: string;
+  name: string;
+  meaning: string;
+}
+
+const TAROT_DECK: TarotCard[] = [
+  { emoji: '🃏', name: '광대 (The Fool)', meaning: '겁 없이 새로운 시작을 던질 타이밍' },
+  { emoji: '🎩', name: '마법사 (The Magician)', meaning: '가진 재능을 제대로 써먹을 때가 왔어요' },
+  { emoji: '🌙', name: '여사제 (The High Priestess)', meaning: '직감이 유난히 잘 맞는 시기, 촉을 믿어봐요' },
+  { emoji: '👑', name: '여황제 (The Empress)', meaning: '풍요와 애정운이 무르익는 흐름' },
+  { emoji: '🏛️', name: '황제 (The Emperor)', meaning: '주도권을 쥐고 밀어붙이면 통하는 때' },
+  { emoji: '💞', name: '연인 (The Lovers)', meaning: '중요한 선택과 인연의 기운이 감돌아요' },
+  { emoji: '🏇', name: '전차 (The Chariot)', meaning: '망설이지 말고 정면 돌파하면 이겨요' },
+  { emoji: '🦁', name: '힘 (Strength)', meaning: '부드럽지만 단단한 뚝심이 빛나는 시기' },
+  { emoji: '🏮', name: '은둔자 (The Hermit)', meaning: '잠시 혼자만의 정비 시간이 필요해요' },
+  { emoji: '🎡', name: '운명의 수레바퀴 (Wheel of Fortune)', meaning: '흐름이 바뀌는 전환점, 기회를 잡아요' },
+  { emoji: '⭐', name: '별 (The Star)', meaning: '희망과 회복의 기운, 바라던 게 이뤄질 조짐' },
+  { emoji: '☀️', name: '태양 (The Sun)', meaning: '뭘 해도 잘 풀리는 최상의 행운 카드' },
+  { emoji: '🌍', name: '세계 (The World)', meaning: '한 사이클을 완성하고 결실을 맺는 때' },
+];
+
+export function getTarotFortune(result: SajuResult): FortuneCard {
+  const rng = seededRandom(`${baseSeed(result)}-tarot`);
+  const card = pick(rng, TAROT_DECK);
   return {
-    emoji: result.animalEmoji,
-    headline: `내 안의 숨은 동물은 바로 ${result.animal}`,
-    subline: `${result.animal}띠 특유의 기운이 사주 곳곳에 흐르고 있어요`,
+    emoji: card.emoji,
+    headline: `오늘의 타로: ${card.name}`,
+    subline: card.meaning,
+  };
+}
+
+// ---------- 행운의 색 ----------
+
+// 일간(천간) 한자 → 오행
+const GAN_ELEMENT: Record<string, keyof WuxingCount> = {
+  '甲': 'wood', '乙': 'wood',
+  '丙': 'fire', '丁': 'fire',
+  '戊': 'earth', '己': 'earth',
+  '庚': 'metal', '辛': 'metal',
+  '壬': 'water', '癸': 'water',
+};
+
+const LUCK_COLORS: Record<keyof WuxingCount, { name: string; hex: string }[]> = {
+  wood: [
+    { name: '싱그러운 초록', hex: '#4caf50' },
+    { name: '민트 청록', hex: '#26a69a' },
+    { name: '라임 그린', hex: '#8bc34a' },
+  ],
+  fire: [
+    { name: '정열의 레드', hex: '#e53935' },
+    { name: '코랄 핑크', hex: '#ff5c8a' },
+    { name: '선명한 오렌지', hex: '#fb8c00' },
+  ],
+  earth: [
+    { name: '따뜻한 옐로', hex: '#fdd835' },
+    { name: '베이지 브라운', hex: '#a1887f' },
+    { name: '골든 카키', hex: '#c0a35e' },
+  ],
+  metal: [
+    { name: '깨끗한 화이트', hex: '#f5f5f5' },
+    { name: '샴페인 골드', hex: '#d4af37' },
+    { name: '실버 그레이', hex: '#b0bec5' },
+  ],
+  water: [
+    { name: '깊은 네이비', hex: '#1a237e' },
+    { name: '시원한 블루', hex: '#1e88e5' },
+    { name: '차분한 블랙', hex: '#212121' },
+  ],
+};
+
+export function getLuckColorFortune(result: SajuResult): FortuneCard {
+  const element = GAN_ELEMENT[result.dayMasterGan] ?? 'wood';
+  const rng = seededRandom(`${baseSeed(result)}-luckcolor`);
+  const color = pick(rng, LUCK_COLORS[element]);
+  return {
+    emoji: '🎨',
+    headline: `행운의 색은 '${color.name}'`,
+    subline: '이 색을 곁에 두면 좋은 기운이 따라와요',
+    color: color.hex,
   };
 }
 
@@ -172,7 +250,8 @@ export const FUN_CATEGORIES: FunCategory[] = [
   { id: 'love', label: '연애운', emoji: '💕', getCard: getLoveFortune },
   { id: 'study', label: '학업운', emoji: '📚', getCard: getStudyFortune },
   { id: 'peak', label: '인생 황금기', emoji: '🌅', getCard: getPeakFortune },
-  { id: 'animal', label: '상징 동물', emoji: '🐯', getCard: getAnimalFortune },
+  { id: 'tarot', label: '오늘의 타로', emoji: '🔮', getCard: getTarotFortune },
+  { id: 'luckcolor', label: '행운의 색', emoji: '🎨', getCard: getLuckColorFortune },
   { id: 'awesome', label: '개쩌는 지수', emoji: '🔥', getCard: getAwesomeFortune },
   { id: 'fit', label: '적성 매칭', emoji: '🎯', getCard: getFitFortune },
   { id: 'job', label: '회사 존버 지수', emoji: '🏢', getCard: getJobEnduranceFortune },
