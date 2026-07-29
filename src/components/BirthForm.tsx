@@ -56,64 +56,89 @@ export default function BirthForm({ onSubmit }: Props) {
     <form className="birth-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <label>생년월일 (양력)</label>
-        <div className="form-inline">
-          <input
-            type="text"
-            inputMode="numeric"
-            value={year}
-            onChange={(e) => setYear(sanitizeMax(e.target.value, 2100))}
-            onBlur={() => setYear(String(clampFull(year, 1900, 2100)))}
-          />
-          <span>년</span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={month}
-            onChange={(e) => setMonth(sanitizeMax(e.target.value, 12))}
-            onBlur={() => setMonth(String(clampFull(month, 1, 12)))}
-          />
-          <span>월</span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={day}
-            onChange={(e) => setDay(sanitizeMax(e.target.value, 31))}
-            onBlur={() => setDay(String(clampFull(day, 1, 31)))}
-          />
-          <span>일</span>
+        <div className="field-grid">
+          <div className="num-field field-year">
+            <input
+              className="num-input"
+              type="text"
+              inputMode="numeric"
+              aria-label="년"
+              placeholder="1995"
+              value={year}
+              onChange={(e) => setYear(sanitizeMax(e.target.value, 2100))}
+              onBlur={() => setYear(String(clampFull(year, 1900, 2100)))}
+            />
+            <span className="unit">년</span>
+          </div>
+          <div className="num-field">
+            <input
+              className="num-input"
+              type="text"
+              inputMode="numeric"
+              aria-label="월"
+              placeholder="1"
+              value={month}
+              onChange={(e) => setMonth(sanitizeMax(e.target.value, 12))}
+              onBlur={() => setMonth(String(clampFull(month, 1, 12)))}
+            />
+            <span className="unit">월</span>
+          </div>
+          <div className="num-field">
+            <input
+              className="num-input"
+              type="text"
+              inputMode="numeric"
+              aria-label="일"
+              placeholder="1"
+              value={day}
+              onChange={(e) => setDay(sanitizeMax(e.target.value, 31))}
+              onBlur={() => setDay(String(clampFull(day, 1, 31)))}
+            />
+            <span className="unit">일</span>
+          </div>
         </div>
       </div>
 
       <div className="form-row">
         <label>태어난 시간</label>
-        <div className="form-inline">
-          <input
-            type="text"
-            inputMode="numeric"
-            value={hour}
-            disabled={timeUnknown}
-            onChange={(e) => setHour(sanitizeMax(e.target.value, 23))}
-            onBlur={() => setHour(String(clampFull(hour, 0, 23)))}
-          />
-          <span>시</span>
-          <input
-            type="text"
-            inputMode="numeric"
-            value={minute}
-            disabled={timeUnknown}
-            onChange={(e) => setMinute(sanitizeMax(e.target.value, 59))}
-            onBlur={() => setMinute(String(clampFull(minute, 0, 59)))}
-          />
-          <span>분</span>
-          <label className="checkbox-label">
+        <div className="field-grid">
+          <div className="num-field">
             <input
-              type="checkbox"
-              checked={timeUnknown}
-              onChange={(e) => setTimeUnknown(e.target.checked)}
+              className="num-input"
+              type="text"
+              inputMode="numeric"
+              aria-label="시"
+              placeholder="12"
+              value={hour}
+              disabled={timeUnknown}
+              onChange={(e) => setHour(sanitizeMax(e.target.value, 23))}
+              onBlur={() => setHour(String(clampFull(hour, 0, 23)))}
             />
-            시간 모름
-          </label>
+            <span className="unit">시</span>
+          </div>
+          <div className="num-field">
+            <input
+              className="num-input"
+              type="text"
+              inputMode="numeric"
+              aria-label="분"
+              placeholder="0"
+              value={minute}
+              disabled={timeUnknown}
+              onChange={(e) => setMinute(sanitizeMax(e.target.value, 59))}
+              onBlur={() => setMinute(String(clampFull(minute, 0, 59)))}
+            />
+            <span className="unit">분</span>
+          </div>
         </div>
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            checked={timeUnknown}
+            onChange={(e) => setTimeUnknown(e.target.checked)}
+          />
+          시간 모름
+        </label>
       </div>
 
       <div className="form-row">
