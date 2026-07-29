@@ -15,18 +15,41 @@ interface Props {
   onSubmit: (values: BirthFormValues) => void;
 }
 
+// 숫자 입력을 숫자로만 제한하고 앞자리 0 제거 + 최댓값 클램프.
+// 타이핑 도중에는 빈 값을 허용하고, 최솟값 보정은 blur/제출 시점에 처리한다.
+function sanitizeMax(raw: string, max: number): string {
+  const digits = raw.replace(/\D/g, '');
+  if (digits === '') return '';
+  const n = Math.min(parseInt(digits, 10), max);
+  return String(n);
+}
+
+function clampFull(raw: string, min: number, max: number): number {
+  const digits = raw.replace(/\D/g, '');
+  if (digits === '') return min;
+  return Math.min(Math.max(parseInt(digits, 10), min), max);
+}
+
 export default function BirthForm({ onSubmit }: Props) {
-  const [year, setYear] = useState(1995);
-  const [month, setMonth] = useState(1);
-  const [day, setDay] = useState(1);
-  const [hour, setHour] = useState(12);
-  const [minute, setMinute] = useState(0);
+  const [year, setYear] = useState('1995');
+  const [month, setMonth] = useState('1');
+  const [day, setDay] = useState('1');
+  const [hour, setHour] = useState('12');
+  const [minute, setMinute] = useState('0');
   const [gender, setGender] = useState<Gender>('male');
   const [timeUnknown, setTimeUnknown] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ year, month, day, hour, minute, gender, timeUnknown });
+    onSubmit({
+      year: clampFull(year, 1900, 2100),
+      month: clampFull(month, 1, 12),
+      day: clampFull(day, 1, 31),
+      hour: clampFull(hour, 0, 23),
+      minute: clampFull(minute, 0, 59),
+      gender,
+      timeUnknown,
+    });
   };
 
   return (
@@ -35,27 +58,27 @@ export default function BirthForm({ onSubmit }: Props) {
         <label>생년월일 (양력)</label>
         <div className="form-inline">
           <input
-            type="number"
-            min={1900}
-            max={2100}
+            type="text"
+            inputMode="numeric"
             value={year}
-            onChange={(e) => setYear(Number(e.target.value))}
+            onChange={(e) => setYear(sanitizeMax(e.target.value, 2100))}
+            onBlur={() => setYear(String(clampFull(year, 1900, 2100)))}
           />
           <span>년</span>
           <input
-            type="number"
-            min={1}
-            max={12}
+            type="text"
+            inputMode="numeric"
             value={month}
-            onChange={(e) => setMonth(Number(e.target.value))}
+            onChange={(e) => setMonth(sanitizeMax(e.target.value, 12))}
+            onBlur={() => setMonth(String(clampFull(month, 1, 12)))}
           />
           <span>월</span>
           <input
-            type="number"
-            min={1}
-            max={31}
+            type="text"
+            inputMode="numeric"
             value={day}
-            onChange={(e) => setDay(Number(e.target.value))}
+            onChange={(e) => setDay(sanitizeMax(e.target.value, 31))}
+            onBlur={() => setDay(String(clampFull(day, 1, 31)))}
           />
           <span>일</span>
         </div>
@@ -65,21 +88,21 @@ export default function BirthForm({ onSubmit }: Props) {
         <label>태어난 시간</label>
         <div className="form-inline">
           <input
-            type="number"
-            min={0}
-            max={23}
+            type="text"
+            inputMode="numeric"
             value={hour}
             disabled={timeUnknown}
-            onChange={(e) => setHour(Number(e.target.value))}
+            onChange={(e) => setHour(sanitizeMax(e.target.value, 23))}
+            onBlur={() => setHour(String(clampFull(hour, 0, 23)))}
           />
           <span>시</span>
           <input
-            type="number"
-            min={0}
-            max={59}
+            type="text"
+            inputMode="numeric"
             value={minute}
             disabled={timeUnknown}
-            onChange={(e) => setMinute(Number(e.target.value))}
+            onChange={(e) => setMinute(sanitizeMax(e.target.value, 59))}
+            onBlur={() => setMinute(String(clampFull(minute, 0, 59)))}
           />
           <span>분</span>
           <label className="checkbox-label">
