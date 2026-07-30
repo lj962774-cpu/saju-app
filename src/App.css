@@ -517,6 +517,87 @@
   background: linear-gradient(90deg, #ff8a5c, #ff5c8a);
 }
 
+/* ---------- 타로 고르기 ---------- */
+
+.tarot-picker {
+  background: #fff7ee;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.tarot-guide {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #8a7a63;
+  margin-bottom: 16px;
+}
+
+.tarot-spread {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tarot-card {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 84px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: linear-gradient(150deg, #6a4bff, #a86bff);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(106, 75, 255, 0.35);
+  transition: transform 0.18s ease, opacity 0.18s ease, background 0.2s ease;
+}
+
+.tarot-card:hover:not(:disabled) {
+  transform: translateY(-6px);
+}
+
+.tarot-card.revealed {
+  background: linear-gradient(150deg, #fff3d6, #ffe0ec);
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 6px 16px rgba(255, 138, 92, 0.4);
+}
+
+.tarot-card.faded {
+  opacity: 0.35;
+}
+
+.tarot-card:disabled {
+  cursor: default;
+}
+
+.tarot-result {
+  margin-top: 18px;
+}
+
+.tarot-result-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.tarot-result-meaning {
+  font-size: 0.9rem;
+  color: #8a7a63;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.tarot-redraw {
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .fun-color-swatch {
   width: 64px;
   height: 64px;

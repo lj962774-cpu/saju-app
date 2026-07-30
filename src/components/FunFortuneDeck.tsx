@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import type { SajuResult } from '../lib/saju';
 import { FUN_CATEGORIES } from '../data/funContent';
+import TarotPicker from './TarotPicker';
 
 export default function FunFortuneDeck({ result }: { result: SajuResult }) {
   const [activeId, setActiveId] = useState(FUN_CATEGORIES[0].id);
   const active = FUN_CATEGORIES.find((c) => c.id === activeId) ?? FUN_CATEGORIES[0];
-  const card = active.getCard(result);
+  const card = active.getCard?.(result);
 
   return (
     <div className="card-section">
@@ -22,19 +23,25 @@ export default function FunFortuneDeck({ result }: { result: SajuResult }) {
           </button>
         ))}
       </div>
-      <div className="fun-result-card">
-        <div className="fun-result-emoji">{card.emoji}</div>
-        <div className="fun-result-headline">{card.headline}</div>
-        {card.color && (
-          <div className="fun-color-swatch" style={{ background: card.color }} />
-        )}
-        {typeof card.score === 'number' && (
-          <div className="fun-score-track">
-            <div className="fun-score-fill" style={{ width: `${card.score}%` }} />
+      {active.id === 'tarot' ? (
+        <TarotPicker />
+      ) : (
+        card && (
+          <div className="fun-result-card">
+            <div className="fun-result-emoji">{card.emoji}</div>
+            <div className="fun-result-headline">{card.headline}</div>
+            {card.color && (
+              <div className="fun-color-swatch" style={{ background: card.color }} />
+            )}
+            {typeof card.score === 'number' && (
+              <div className="fun-score-track">
+                <div className="fun-score-fill" style={{ width: `${card.score}%` }} />
+              </div>
+            )}
+            <div className="fun-result-subline">{card.subline}</div>
           </div>
-        )}
-        <div className="fun-result-subline">{card.subline}</div>
-      </div>
+        )
+      )}
     </div>
   );
 }
