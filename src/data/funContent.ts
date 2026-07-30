@@ -118,13 +118,13 @@ export function getPeakFortune(result: SajuResult): FortuneCard {
 
 // ---------- 타로 ----------
 
-interface TarotCard {
+export interface TarotCard {
   emoji: string;
   name: string;
   meaning: string;
 }
 
-const TAROT_DECK: TarotCard[] = [
+export const TAROT_DECK: TarotCard[] = [
   { emoji: '🃏', name: '광대 (The Fool)', meaning: '겁 없이 새로운 시작을 던질 타이밍' },
   { emoji: '🎩', name: '마법사 (The Magician)', meaning: '가진 재능을 제대로 써먹을 때가 왔어요' },
   { emoji: '🌙', name: '여사제 (The High Priestess)', meaning: '직감이 유난히 잘 맞는 시기, 촉을 믿어봐요' },
@@ -139,16 +139,6 @@ const TAROT_DECK: TarotCard[] = [
   { emoji: '☀️', name: '태양 (The Sun)', meaning: '뭘 해도 잘 풀리는 최상의 행운 카드' },
   { emoji: '🌍', name: '세계 (The World)', meaning: '한 사이클을 완성하고 결실을 맺는 때' },
 ];
-
-export function getTarotFortune(result: SajuResult): FortuneCard {
-  const rng = seededRandom(`${baseSeed(result)}-tarot`);
-  const card = pick(rng, TAROT_DECK);
-  return {
-    emoji: card.emoji,
-    headline: `오늘의 타로: ${card.name}`,
-    subline: card.meaning,
-  };
-}
 
 // ---------- 행운의 색 ----------
 
@@ -242,7 +232,8 @@ export interface FunCategory {
   id: string;
   label: string;
   emoji: string;
-  getCard: (result: SajuResult) => FortuneCard;
+  // 'tarot'처럼 직접 카드를 고르는 인터랙티브 항목은 getCard 없이 전용 UI로 렌더링한다.
+  getCard?: (result: SajuResult) => FortuneCard;
 }
 
 export const FUN_CATEGORIES: FunCategory[] = [
@@ -250,7 +241,7 @@ export const FUN_CATEGORIES: FunCategory[] = [
   { id: 'love', label: '연애운', emoji: '💕', getCard: getLoveFortune },
   { id: 'study', label: '학업운', emoji: '📚', getCard: getStudyFortune },
   { id: 'peak', label: '인생 황금기', emoji: '🌅', getCard: getPeakFortune },
-  { id: 'tarot', label: '오늘의 타로', emoji: '🔮', getCard: getTarotFortune },
+  { id: 'tarot', label: '오늘의 타로', emoji: '🔮' },
   { id: 'luckcolor', label: '행운의 색', emoji: '🎨', getCard: getLuckColorFortune },
   { id: 'awesome', label: '개쩌는 지수', emoji: '🔥', getCard: getAwesomeFortune },
   { id: 'fit', label: '적성 매칭', emoji: '🎯', getCard: getFitFortune },
